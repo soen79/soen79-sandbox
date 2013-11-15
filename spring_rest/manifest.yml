@@ -1,0 +1,8 @@
+---
+applications:
+- name: springInt79
+  memory: 512M
+  instances: 1
+  host: springInt79
+  domain: cfapps.io
+  path: target
