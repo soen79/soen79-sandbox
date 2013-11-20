@@ -1,11 +1,14 @@
 package org.springsource.cloudfoundry.mvc.web;
 
+import org.apache.log4j.Logger;
 import org.cloudfoundry.runtime.env.CloudEnvironment;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
 public class SpringApplicationContextInitializer implements ApplicationContextInitializer<AnnotationConfigWebApplicationContext> {
 
+	static Logger log = Logger.getLogger(SpringApplicationContextInitializer.class);
+	
     private CloudEnvironment cloudEnvironment = new CloudEnvironment();
 
     private boolean isCloudFoundry() {
@@ -15,11 +18,12 @@ public class SpringApplicationContextInitializer implements ApplicationContextIn
     @Override
     public void initialize(AnnotationConfigWebApplicationContext applicationContext) {
 
-
+    	log.debug("----------------STARTING INITIALIZE BATMAN------------------");
         String profile;
 
         if (isCloudFoundry()) {
             profile = "cloud";
+            log.debug("----------------Profile is cloud foundry------------------");
         } else {
             profile = "default";
         }

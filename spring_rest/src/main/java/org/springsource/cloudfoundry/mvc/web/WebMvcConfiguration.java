@@ -1,5 +1,6 @@
 package org.springsource.cloudfoundry.mvc.web;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +19,8 @@ import org.springsource.cloudfoundry.mvc.services.config.ServicesConfiguration;
 @ComponentScan
 public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 
+	static Logger log = Logger.getLogger(WebMvcConfiguration.class);
+			
     @Bean
     public InternalResourceViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
@@ -37,7 +40,12 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/web/**").addResourceLocations("/web/");
+    	log.debug("ADDING resourceHandlerRegistry" + registry.toString());
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/assets/**").addResourceLocations("/assets/").setCachePeriod(31556926);
+        registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
+        registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(31556926);
+        registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(31556926);
     }
 
     @Override

@@ -1,13 +1,17 @@
 package org.springsource.cloudfoundry.mvc.services.config;
 
+import javax.persistence.EntityManagerFactory;
+
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springsource.cloudfoundry.mvc.services.CustomerService;
-
-import javax.persistence.EntityManagerFactory;
+import org.springsource.cloudfoundry.mvc.services.LoginController;
 
 
 @Configuration
@@ -15,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 @EnableCaching
 @EnableTransactionManagement
 @Import({CloudFoundryDataSourceConfiguration.class, LocalDataSourceConfiguration.class})
-@ComponentScan(basePackageClasses = {CustomerService.class})
+@ComponentScan(basePackageClasses = {LoginController.class})
 public class ServicesConfiguration {
 
     @Bean

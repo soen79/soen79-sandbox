@@ -1,6 +1,12 @@
 package org.springsource.cloudfoundry.mvc.services.config;
 
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.sql.DataSource;
+
 import org.hibernate.dialect.H2Dialect;
 import org.hibernate.ejb.HibernatePersistence;
 import org.springframework.cache.Cache;
@@ -14,12 +20,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springsource.cloudfoundry.mvc.services.Customer;
-
-import javax.sql.DataSource;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import org.springsource.cloudfoundry.mvc.services.LoginController;
 
 @Configuration
 @Profile("default")
@@ -56,7 +57,7 @@ public class LocalDataSourceConfiguration   {
     public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean( DataSource dataSource  ) throws Exception {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource( dataSource );
-        em.setPackagesToScan(Customer.class.getPackage().getName());
+        em.setPackagesToScan(LoginController.class.getPackage().getName());
         em.setPersistenceProvider(new HibernatePersistence());
         Map<String, String> p = new HashMap<String, String>();
         p.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "create");
