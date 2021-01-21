@@ -1,4 +1,6 @@
 This is the first message
 This is the second message
 This is the third message
+<<<<<<< HEAD
 This is a fix from dev2
+This is the fouth message [dev1]
